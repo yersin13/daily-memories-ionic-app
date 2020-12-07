@@ -66,7 +66,7 @@ return <Redirect to="/my/entries" />
           </IonItem>
         </IonList>
         {status.error &&
-        <IonToast color="danger" isOpen={true} message={errorType} />
+        <IonToast color="danger" duration={2000} isOpen={true} message={errorType} />
         }
     <IonButton expand='block' onClick={handleRegister}>
       Create Account

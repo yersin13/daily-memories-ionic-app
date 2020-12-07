@@ -26,8 +26,10 @@ const LoginPage: React.FC = () => {
   const[email,setEmail] =useState('');
   const[password, setPassword] = useState('');
   const [status,setStatus] =useState({loading:false,error:false});
-  const [errorType ,setErrorType] =useState('');
+  const [errorType ,setErrorType] =useState('opss!');
   
+ 
+
 
   const handleLogin = async ()=> {
     try{
@@ -36,6 +38,7 @@ const LoginPage: React.FC = () => {
       console.log('credential:', credential);
     } catch(error){
       setStatus({loading:false,error:true});
+      setErrorType(error.message);
       console.log('error', error);
     }
   };
@@ -66,7 +69,7 @@ return <Redirect to="/my/entries" />
           </IonItem>
         </IonList>
         {status.error &&
-        <IonToast color="danger" isOpen={true} message={errorType} />
+        <IonToast duration={2000} color="danger" isOpen={true} message={errorType} />
         }
     <IonButton expand='block' onClick={handleLogin}>Login</IonButton>
     <IonButton expand='block' fill="clear" routerLink="/register">

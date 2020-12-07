@@ -33,6 +33,8 @@ return url;
 }
 
 
+
+
 const AddEntryPage: React.FC = () => {
   const { userId } = useAuth();
   const history = useHistory();
@@ -41,7 +43,8 @@ const AddEntryPage: React.FC = () => {
   const [pictureUrl, setPictureUrl] = useState('/assets/placeholder.png');
   const [description, setDescription] = useState('');
   const fileInputRef = useRef<HTMLInputElement>();
-
+  const [buttomStatus, setButtomStatus] = useState(false);
+ 
   //this code is to clean memory link created by selected images before upload
   useEffect(() => ()=> {
     if (pictureUrl.startsWith('blob:')){
@@ -88,6 +91,7 @@ const handlePictureClick = async () =>{
 
     const entryRef = await entriesRef.add(entryData);
     console.log('saved', entryRef.id);
+    setButtomStatus(true);
     history.goBack();
     // console.log('should save', {title, description});
   }
@@ -134,7 +138,7 @@ const handlePictureClick = async () =>{
             onIonChange={(event) => setDescription(event.detail.value)} 
             />
           </IonItem>
-          <IonButton expand="block" onClick={handleSave}>Save</IonButton>
+          <IonButton expand="block" disabled={buttomStatus} onClick={handleSave}>Save</IonButton>
         </IonList>
       </IonContent>
     </IonPage>
