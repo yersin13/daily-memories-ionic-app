@@ -10,6 +10,7 @@ import {
   IonPage,
   IonText,
   IonTitle,
+  IonToast,
   IonToolbar,
 } from '@ionic/react';
 import React, { useState } from 'react';
@@ -25,6 +26,7 @@ const LoginPage: React.FC = () => {
   const[email,setEmail] =useState('');
   const[password, setPassword] = useState('');
   const [status,setStatus] =useState({loading:false,error:false});
+  const [errorType ,setErrorType] =useState('');
   
 
   const handleLogin = async ()=> {
@@ -64,7 +66,7 @@ return <Redirect to="/my/entries" />
           </IonItem>
         </IonList>
         {status.error &&
-        <IonText color="danger">Invalid credential</IonText>
+        <IonToast color="danger" isOpen={true} message={errorType} />
         }
     <IonButton expand='block' onClick={handleLogin}>Login</IonButton>
     <IonButton expand='block' fill="clear" routerLink="/register">

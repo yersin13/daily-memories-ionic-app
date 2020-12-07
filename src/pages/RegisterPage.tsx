@@ -8,8 +8,8 @@ import {
   IonList,
   IonLoading,
   IonPage,
-  IonText,
   IonTitle,
+  IonToast,
   IonToolbar,
 } from '@ionic/react';
 import React, { useState } from 'react';
@@ -25,6 +25,7 @@ const RegisterPage: React.FC = () => {
   const[email,setEmail] =useState('');
   const[password, setPassword] = useState('');
   const [status,setStatus] =useState({loading:false,error:false});
+  const [errorType ,setErrorType] =useState('');
   
 
   const handleRegister = async ()=> {
@@ -34,7 +35,8 @@ const RegisterPage: React.FC = () => {
       console.log('credential:', credential);
     } catch(error){
       setStatus({loading:false,error:true});
-      console.log('error', error);
+      setErrorType(error.message)
+      console.log('error', error.message);
     }
   };
 
@@ -64,7 +66,7 @@ return <Redirect to="/my/entries" />
           </IonItem>
         </IonList>
         {status.error &&
-        <IonText color="danger">Registration failed</IonText>
+        <IonToast color="danger" isOpen={true} message={errorType} />
         }
     <IonButton expand='block' onClick={handleRegister}>
       Create Account
