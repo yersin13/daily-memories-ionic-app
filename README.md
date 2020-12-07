@@ -1,6 +1,7 @@
 # Daily Moments
 
-This example is part of the Ionic React course.
+Ionic-React-app
+Authentication, database and cloud with firebase
 
 ## Links
 
